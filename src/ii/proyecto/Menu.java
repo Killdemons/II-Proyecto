@@ -5,15 +5,8 @@
  */
 package ii.proyecto;
 
-/**
- *
- * @author bcamp
- */
 public class Menu extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Menu
-     */
     public Menu() {
         initComponents();
         setLocationRelativeTo(null);
@@ -52,6 +45,11 @@ public class Menu extends javax.swing.JFrame {
 
         btnLaberinto.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnLaberinto.setText("Laberinto");
+        btnLaberinto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLaberintoActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnLaberinto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
 
         pack();
@@ -62,6 +60,12 @@ public class Menu extends javax.swing.JFrame {
         obj.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnPiscinaActionPerformed
+
+    private void btnLaberintoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaberintoActionPerformed
+        Laberinto obj = new Laberinto();
+        obj.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnLaberintoActionPerformed
 
     /**
      * @param args the command line arguments
