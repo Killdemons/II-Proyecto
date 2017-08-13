@@ -5,7 +5,6 @@
  */
 package ii.proyecto;
 
-import java.util.Arrays;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -17,6 +16,11 @@ public class Laberinto extends javax.swing.JFrame {
 
     int column=10, row=7;
     String matriz [][] = new String [row][column];
+    String mat = "";
+    
+    
+    
+    
     public Laberinto() {
         initComponents();
         setLocationRelativeTo(null);
@@ -116,7 +120,7 @@ public class Laberinto extends javax.swing.JFrame {
         });
         getContentPane().add(btnW1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
 
-        jLabel3.setText("֍ = Final");
+        jLabel3.setText("֍ = Meta");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         jLabel4.setText("© = Comodin");
@@ -141,7 +145,6 @@ public class Laberinto extends javax.swing.JFrame {
                 break;
             }
         }
-        String mat = "";
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 mat+=matriz[i][j];
@@ -154,21 +157,22 @@ public class Laberinto extends javax.swing.JFrame {
 
     private void btnLaberintoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaberintoActionPerformed
         Random rand = new Random();
-        String mat = "";
+        int cont=0;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 if(i==1 && j==1 || i==2 && j==1 || i==1 && j==2 || i==5 && j==8){
                     matriz[i][j]=" ";
                 }
                 else if((j==0 && (i==0 || i==1 || i==2 || i==3 || i==4 || i==5 || i==6)) || (j==9 && (i==0 || i==1 || i==2 || i==3 || i==4 || i==5 || i==6)) || (i==0 && (j==0 || j==1 || j==2 || j==3 || j==4 || j==5 || j==6 || j==7 || j==8 || j==9)) || (i==6 && (j==0 || j==1 || j==2 || j==3 || j==4 || j==5 || j==6 || j==7 || j==8 || j==9))){
-                    matriz[i][j]="#";
+                    matriz[i][j]="*";
                 }
                 else{
-                    if(rand.nextInt(2)==0){
-                        matriz[i][j]=" ";
+                    if(cont<10 && rand.nextInt(2)==1){
+                        matriz[i][j]="#";
+                        cont++;
                     }
                     else{
-                        matriz[i][j]="#";
+                        matriz[i][j]=" ";
                     }
                 }
             }
@@ -190,22 +194,35 @@ public class Laberinto extends javax.swing.JFrame {
                     if (null != matriz[i][j+1]) {
                         switch (matriz[i][j+1]) {
                             case "#":
-                                JOptionPane.showMessageDialog(null, "No se puede mover para ese lado");
+                                JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
+                                Laberinto ven = new Laberinto();
+                                ven.setVisible(true);
+                                dispose();
                                 break OUTER;
                             case " ":
                                 matriz[i][j] = " ";
                                 matriz[i][j+1] = "X";
-                                String mat = "";
                                 for (int x = 0; x < row; x++) {
                                     for (int y = 0; y < column; y++) {
                                         mat+=matriz[x][y];
                                     }
                                     mat+="\n";
                                 }       txtLaberinto.setText(mat);
-                                JOptionPane.showMessageDialog(null, "Movimiento realizado");
                                 break OUTER;
                             case "©":
+                                matriz[i][j]=" ";
+                                matriz[i][j+1]="X";
+                                for (int x = 0; x < row; x++) {
+                                    for (int y = 0; y < column; y++) {
+                                        mat+=matriz[x][y];
+                                    }
+                                    mat+="\n";
+                                }
+                                txtLaberinto.setText(mat);
+                                i=row;
                                 JOptionPane.showMessageDialog(null, "Comodin encontrado");
+                                Comodin v = new Comodin();
+                                v.setVisible(true);
                                 break;
                             case "֍":
                                 JOptionPane.showMessageDialog(null, "Juego Completado");
@@ -227,22 +244,35 @@ public class Laberinto extends javax.swing.JFrame {
                     if (null != matriz[i][j-1]) {
                         switch (matriz[i][j-1]) {
                             case "#":
-                                JOptionPane.showMessageDialog(null, "No se puede mover para ese lado");
+                                JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
+                                Laberinto ven = new Laberinto();
+                                ven.setVisible(true);
+                                dispose();
                                 break OUTER;
                             case " ":
                                 matriz[i][j] = " ";
                                 matriz[i][j-1] = "X";
-                                String mat = "";
                                 for (int x = 0; x < row; x++) {
                                     for (int y = 0; y < column; y++) {
                                         mat+=matriz[x][y];
                                     }
                                     mat+="\n";
                                 }       txtLaberinto.setText(mat);
-                                JOptionPane.showMessageDialog(null, "Movimiento realizado");
                                 break OUTER;
                             case "©":
+                                matriz[i][j]=" ";
+                                matriz[i][j-1]="X";
+                                for (int x = 0; x < row; x++) {
+                                    for (int y = 0; y < column; y++) {
+                                        mat+=matriz[x][y];
+                                    }
+                                    mat+="\n";
+                                }
+                                txtLaberinto.setText(mat);
+                                i=row;
                                 JOptionPane.showMessageDialog(null, "Comodin encontrado");
+                                Comodin v = new Comodin();
+                                v.setVisible(true);
                                 break;
                             case "֍":
                                 JOptionPane.showMessageDialog(null, "Juego Completado");
@@ -264,22 +294,35 @@ public class Laberinto extends javax.swing.JFrame {
                     if (null != matriz[i-1][j]) {
                         switch (matriz[i-1][j]) {
                             case "#":
-                                JOptionPane.showMessageDialog(null, "No se puede mover para ese lado");
+                                JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
+                                Laberinto ven = new Laberinto();
+                                ven.setVisible(true);
+                                dispose();
                                 break OUTER;
                             case " ":
                                 matriz[i][j] = " ";
                                 matriz[i-1][j] = "X";
-                                String mat = "";
                                 for (int x = 0; x < row; x++) {
                                     for (int y = 0; y < column; y++) {
                                         mat+=matriz[x][y];
                                     }
                                     mat+="\n";
                                 }       txtLaberinto.setText(mat);
-                                JOptionPane.showMessageDialog(null, "Movimiento realizado");
                                 break OUTER;
                             case "©":
+                                matriz[i][j]=" ";
+                                matriz[i-1][j]="X";
+                                for (int x = 0; x < row; x++) {
+                                    for (int y = 0; y < column; y++) {
+                                        mat+=matriz[x][y];
+                                    }
+                                    mat+="\n";
+                                }
+                                txtLaberinto.setText(mat);
+                                i=row;
                                 JOptionPane.showMessageDialog(null, "Comodin encontrado");
+                                Comodin v = new Comodin();
+                                v.setVisible(true);
                                 break;
                             case "֍":
                                 JOptionPane.showMessageDialog(null, "Juego Completado");
@@ -301,26 +344,43 @@ public class Laberinto extends javax.swing.JFrame {
                     if (null != matriz[i+1][j]) {
                         switch (matriz[i+1][j]) {
                             case "#":
-                                JOptionPane.showMessageDialog(null, "No se puede mover para ese lado");
+                                JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
+                                Laberinto ven = new Laberinto();
+                                ven.setVisible(true);
+                                dispose();
                                 break OUTER;
                             case " ":
                                 matriz[i][j] = " ";
                                 matriz[i+1][j] = "X";
-                                String mat = "";
                                 for (int x = 0; x < row; x++) {
                                     for (int y = 0; y < column; y++) {
                                         mat+=matriz[x][y];
                                     }
                                     mat+="\n";
-                                }       txtLaberinto.setText(mat);
-                                JOptionPane.showMessageDialog(null, "Movimiento realizado");
+                                }
+                                txtLaberinto.setText(mat);
                                 i=row;
                                 break OUTER;
                             case "©":
+                                matriz[i][j]=" ";
+                                matriz[i+1][j]="X";
+                                for (int x = 0; x < row; x++) {
+                                    for (int y = 0; y < column; y++) {
+                                        mat+=matriz[x][y];
+                                    }
+                                    mat+="\n";
+                                }
+                                txtLaberinto.setText(mat);
+                                i=row;
                                 JOptionPane.showMessageDialog(null, "Comodin encontrado");
+                                Comodin v = new Comodin();
+                                v.setVisible(true);
                                 break;
                             case "֍":
                                 JOptionPane.showMessageDialog(null, "Juego Completado");
+                                Laberinto vent = new Laberinto();
+                                vent.setVisible(true);
+                                dispose();
                                 break;
                             default:
                                 break;
