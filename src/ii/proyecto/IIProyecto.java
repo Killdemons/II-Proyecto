@@ -6,5 +6,5 @@ public class IIProyecto {
         Menu ven = new Menu();
         ven.setVisible(true);
     }
-
+    
 }
