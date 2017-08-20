@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
 public class comienzo_hilos2 extends Thread {
+    public static int T2;
     int PosiInicioX, limite;
     JLabel competidor;
     JTextArea txtArea;
@@ -30,6 +31,7 @@ public class comienzo_hilos2 extends Thread {
             }
         }
         int fin = (int) new GregorianCalendar().getTimeInMillis();
-        txtArea.append("Player 2: "+(fin - inicio)+" ms\n");
+        T2= fin - inicio;
+        txtArea.append("Player 2: "+T2+" ms\n");
     }
 }
