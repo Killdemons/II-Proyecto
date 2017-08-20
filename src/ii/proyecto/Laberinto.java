@@ -130,6 +130,7 @@ public class Laberinto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        mat = "";
         if(" ".equals(matriz[1][1])){
             matriz[1][1]="X";
         }
@@ -150,12 +151,14 @@ public class Laberinto extends javax.swing.JFrame {
                 mat+=matriz[i][j];
             }
             mat+="\n";
-        }
+        }       
+        txtLaberinto.removeAll();
         txtLaberinto.setText(mat);
         JOptionPane.showMessageDialog(null, "Juego iniciado, favor usar los botones en pantalla para moverse");
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void btnLaberintoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaberintoActionPerformed
+        mat = "";
         Random rand = new Random();
         int cont=0;
         for (int i = 0; i < row; i++) {
@@ -184,9 +187,11 @@ public class Laberinto extends javax.swing.JFrame {
             mat+="\n";
         }
         txtLaberinto.setText(mat);
+        
     }//GEN-LAST:event_btnLaberintoActionPerformed
 
     private void btnDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDActionPerformed
+        mat = "";
         for (int i = 0; i < row; i++) {
             OUTER:
             for (int j = 0; j < column; j++) {
@@ -207,7 +212,8 @@ public class Laberinto extends javax.swing.JFrame {
                                         mat+=matriz[x][y];
                                     }
                                     mat+="\n";
-                                }       txtLaberinto.setText(mat);
+                                }       
+                                txtLaberinto.setText(mat);
                                 break OUTER;
                             case "©":
                                 matriz[i][j]=" ";
@@ -238,6 +244,7 @@ public class Laberinto extends javax.swing.JFrame {
 
     private void btnAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAActionPerformed
         for (int i = 0; i < row; i++) {
+            mat = "";
             OUTER:
             for (int j = 0; j < column; j++) {
                 if ("X".equals(matriz[i][j])) {
@@ -257,7 +264,8 @@ public class Laberinto extends javax.swing.JFrame {
                                         mat+=matriz[x][y];
                                     }
                                     mat+="\n";
-                                }       txtLaberinto.setText(mat);
+                                }
+                                txtLaberinto.setText(mat);
                                 break OUTER;
                             case "©":
                                 matriz[i][j]=" ";
@@ -288,6 +296,7 @@ public class Laberinto extends javax.swing.JFrame {
 
     private void btnW1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnW1ActionPerformed
         for (int i = 0; i < row; i++) {
+            mat = "";
             OUTER:
             for (int j = 0; j < column; j++) {
                 if ("X".equals(matriz[i][j])) {
@@ -307,7 +316,8 @@ public class Laberinto extends javax.swing.JFrame {
                                         mat+=matriz[x][y];
                                     }
                                     mat+="\n";
-                                }       txtLaberinto.setText(mat);
+                                }
+                                txtLaberinto.setText(mat);
                                 break OUTER;
                             case "©":
                                 matriz[i][j]=" ";
@@ -338,6 +348,7 @@ public class Laberinto extends javax.swing.JFrame {
 
     private void btnWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWActionPerformed
         for (int i = 0; i < row; i++) {
+            mat = "";
             OUTER:
             for (int j = 0; j < column; j++) {
                 if ("X".equals(matriz[i][j])) {
