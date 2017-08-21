@@ -14,13 +14,13 @@ import javax.swing.JOptionPane;
  */
 public class Laberinto extends javax.swing.JFrame {
 
-    int column=10, row=7;
-    String matriz [][] = new String [row][column];
+    int column = 10, row = 7;
+    String matriz[][] = new String[row][column];
     String mat = "";
-    
-    
-    
-    
+    String[] questions = {"Contento", "Triste", "Melancolico"};
+    int[] answers = {0, 1, 1};
+    Random rand = new Random();
+
     public Laberinto() {
         initComponents();
         setLocationRelativeTo(null);
@@ -41,11 +41,11 @@ public class Laberinto extends javax.swing.JFrame {
         btnLaberinto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtLaberinto = new javax.swing.JTextArea();
-        btnD = new javax.swing.JButton();
-        btnW = new javax.swing.JButton();
-        btnA = new javax.swing.JButton();
+        btnArriba = new javax.swing.JButton();
+        btnAbajo = new javax.swing.JButton();
+        btnDerecha = new javax.swing.JButton();
+        btnIzquierda = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        btnW1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -85,40 +85,40 @@ public class Laberinto extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, 300, 310));
 
-        btnD.setText("→");
-        btnD.addActionListener(new java.awt.event.ActionListener() {
+        btnArriba.setText("↑");
+        btnArriba.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDActionPerformed(evt);
+                btnArribaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnD, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        getContentPane().add(btnArriba, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
 
-        btnW.setText("↓");
-        btnW.addActionListener(new java.awt.event.ActionListener() {
+        btnAbajo.setText("↓");
+        btnAbajo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnWActionPerformed(evt);
+                btnAbajoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnW, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
+        getContentPane().add(btnAbajo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
-        btnA.setText("←");
-        btnA.addActionListener(new java.awt.event.ActionListener() {
+        btnDerecha.setText("→");
+        btnDerecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAActionPerformed(evt);
+                btnDerechaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnA, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
+        getContentPane().add(btnDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+
+        btnIzquierda.setText("←");
+        btnIzquierda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzquierdaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnIzquierda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         jLabel2.setText("X = Jugador");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
-
-        btnW1.setText("↑");
-        btnW1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnW1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnW1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
 
         jLabel3.setText("֍ = Meta");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
@@ -131,27 +131,26 @@ public class Laberinto extends javax.swing.JFrame {
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         mat = "";
-        if(" ".equals(matriz[1][1])){
-            matriz[1][1]="X";
+        if (" ".equals(matriz[1][1])) {
+            matriz[1][1] = "X";
         }
-        if(" ".equals(matriz[5][8])){
-            matriz[5][8]="֍";
+        if (" ".equals(matriz[5][8])) {
+            matriz[5][8] = "֍";
         }
-        Random rand = new Random();
-        while(true){
+        while (true) {
             int n1 = rand.nextInt(row);
             int n2 = rand.nextInt(column);
-            if(" ".equals(matriz[n1][n2])){
-                matriz[n1][n2]="©";
+            if (" ".equals(matriz[n1][n2])) {
+                matriz[n1][n2] = "©";
                 break;
             }
         }
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                mat+=matriz[i][j];
+                mat += matriz[i][j];
             }
-            mat+="\n";
-        }       
+            mat += "\n";
+        }
         txtLaberinto.removeAll();
         txtLaberinto.setText(mat);
         JOptionPane.showMessageDialog(null, "Juego iniciado, favor usar los botones en pantalla para moverse");
@@ -159,248 +158,409 @@ public class Laberinto extends javax.swing.JFrame {
 
     private void btnLaberintoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLaberintoActionPerformed
         mat = "";
-        Random rand = new Random();
-        int cont=0;
+        int cont = 0;
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                if(i==1 && j==1 || i==2 && j==1 || i==1 && j==2 || i==5 && j==8){
-                    matriz[i][j]=" ";
-                }
-                else if((j==0 && (i==0 || i==1 || i==2 || i==3 || i==4 || i==5 || i==6)) || (j==9 && (i==0 || i==1 || i==2 || i==3 || i==4 || i==5 || i==6)) || (i==0 && (j==0 || j==1 || j==2 || j==3 || j==4 || j==5 || j==6 || j==7 || j==8 || j==9)) || (i==6 && (j==0 || j==1 || j==2 || j==3 || j==4 || j==5 || j==6 || j==7 || j==8 || j==9))){
-                    matriz[i][j]="*";
-                }
-                else{
-                    if(cont<10 && rand.nextInt(2)==1){
-                        matriz[i][j]="#";
+                if (i == 1 && j == 1 || i == 2 && j == 1 || i == 1 && j == 2 || i == 5 && j == 8) {
+                    matriz[i][j] = " ";
+                } else if ((j == 0 && (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6)) || (j == 9 && (i == 0 || i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6)) || (i == 0 && (j == 0 || j == 1 || j == 2 || j == 3 || j == 4 || j == 5 || j == 6 || j == 7 || j == 8 || j == 9)) || (i == 6 && (j == 0 || j == 1 || j == 2 || j == 3 || j == 4 || j == 5 || j == 6 || j == 7 || j == 8 || j == 9))) {
+                    matriz[i][j] = "*";
+                } else {
+                    if (cont < 10 && rand.nextInt(2) == 1) {
+                        matriz[i][j] = "#";
                         cont++;
-                    }
-                    else{
-                        matriz[i][j]=" ";
+                    } else {
+                        matriz[i][j] = " ";
                     }
                 }
             }
         }
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                mat+=matriz[i][j];
+                mat += matriz[i][j];
             }
-            mat+="\n";
+            mat += "\n";
         }
         txtLaberinto.setText(mat);
-        
+
     }//GEN-LAST:event_btnLaberintoActionPerformed
 
-    private void btnDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDActionPerformed
+    private void btnDerechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDerechaActionPerformed
         mat = "";
-        for (int i = 0; i < row; i++) {
-            OUTER:
-            for (int j = 0; j < column; j++) {
-                if ("X".equals(matriz[i][j])) {
-                    if (null != matriz[i][j+1]) {
-                        switch (matriz[i][j+1]) {
-                            case "#":
-                                JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
-                                Laberinto ven = new Laberinto();
-                                ven.setVisible(true);
-                                dispose();
-                                break OUTER;
-                            case " ":
-                                matriz[i][j] = " ";
-                                matriz[i][j+1] = "X";
-                                for (int x = 0; x < row; x++) {
-                                    for (int y = 0; y < column; y++) {
-                                        mat+=matriz[x][y];
+        int num = rand.nextInt(3);
+        int respuesta = JOptionPane.showOptionDialog(null, questions[num], "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Verdadero", "Falso"}, "Verdadero");
+        if (respuesta == answers[num]) {
+            int option = JOptionPane.showOptionDialog(null, "¿Que decea hacer?", "Opciones", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Quitar trampa", "Comodin"}, "Quitar trampa");
+            if (option == 0) {
+                while (true) {
+                    String f = JOptionPane.showInputDialog("Digite la fila donde se encuentra la trampa");
+                    String c = JOptionPane.showInputDialog("Digite la columna donde se encuentra la trampa");
+                    if (matriz[Integer.parseInt(f)][Integer.parseInt(c)].equals("#")) {
+                        matriz[Integer.parseInt(f)][Integer.parseInt(c)] = " ";
+                        break;
+                    }
+                }
+            } else {
+                for (int i = 0; i < row; i++) {
+                    for (int j = 0; j < column; j++) {
+                        if ("©".equals(matriz[i][j])) {
+                            matriz[i][j] = " ";
+                        }
+                    }
+                }
+                Comodin v = new Comodin();
+                v.setVisible(true);
+            }
+            for (int i = 0; i < row; i++) {
+                OUTER:
+                for (int j = 0; j < column; j++) {
+                    if ("X".equals(matriz[i][j])) {
+                        if (null != matriz[i][j + 1]) {
+                            switch (matriz[i][j + 1]) {
+                                case "#":
+                                    JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
+                                    Laberinto ven = new Laberinto();
+                                    ven.setVisible(true);
+                                    dispose();
+                                    break OUTER;
+                                case " ":
+                                    matriz[i][j] = " ";
+                                    matriz[i][j + 1] = "X";
+                                    for (int x = 0; x < row; x++) {
+                                        for (int y = 0; y < column; y++) {
+                                            mat += matriz[x][y];
+                                        }
+                                        mat += "\n";
                                     }
-                                    mat+="\n";
-                                }       
-                                txtLaberinto.setText(mat);
-                                break OUTER;
-                            case "©":
-                                matriz[i][j]=" ";
-                                matriz[i][j+1]="X";
-                                for (int x = 0; x < row; x++) {
-                                    for (int y = 0; y < column; y++) {
-                                        mat+=matriz[x][y];
+                                    txtLaberinto.setText(mat);
+                                    break OUTER;
+                                case "©":
+                                    matriz[i][j] = " ";
+                                    matriz[i][j + 1] = "X";
+                                    for (int x = 0; x < row; x++) {
+                                        for (int y = 0; y < column; y++) {
+                                            mat += matriz[x][y];
+                                        }
+                                        mat += "\n";
                                     }
-                                    mat+="\n";
-                                }
-                                txtLaberinto.setText(mat);
-                                i=row;
-                                JOptionPane.showMessageDialog(null, "Comodin encontrado");
-                                Comodin v = new Comodin();
-                                v.setVisible(true);
-                                break;
-                            case "֍":
-                                JOptionPane.showMessageDialog(null, "Juego Completado");
-                                break;
-                            default:
-                                break;
+                                    txtLaberinto.setText(mat);
+                                    i = row;
+                                    JOptionPane.showMessageDialog(null, "Comodin encontrado");
+                                    Comodin v = new Comodin();
+                                    v.setVisible(true);
+                                    break;
+                                case "֍":
+                                    JOptionPane.showMessageDialog(null, "Juego Completado");
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Respuesta Incorrecta, se ha generado una nueva trampa");
+            while (true) {
+                int f = rand.nextInt(row);
+                int c = rand.nextInt(column);
+                if (matriz[f][c].equals(" ")) {
+                    matriz[f][c] = "#";
+                    break;
+                }
+            }
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < column; j++) {
+                    mat += matriz[i][j];
+                }
+                mat += "\n";
+            }
+            txtLaberinto.setText(mat);
         }
-    }//GEN-LAST:event_btnDActionPerformed
+    }//GEN-LAST:event_btnDerechaActionPerformed
 
-    private void btnAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAActionPerformed
-        for (int i = 0; i < row; i++) {
-            mat = "";
-            OUTER:
-            for (int j = 0; j < column; j++) {
-                if ("X".equals(matriz[i][j])) {
-                    if (null != matriz[i][j-1]) {
-                        switch (matriz[i][j-1]) {
-                            case "#":
-                                JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
-                                Laberinto ven = new Laberinto();
-                                ven.setVisible(true);
-                                dispose();
-                                break OUTER;
-                            case " ":
-                                matriz[i][j] = " ";
-                                matriz[i][j-1] = "X";
-                                for (int x = 0; x < row; x++) {
-                                    for (int y = 0; y < column; y++) {
-                                        mat+=matriz[x][y];
+    private void btnIzquierdaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzquierdaActionPerformed
+        mat = "";
+        int num = rand.nextInt(3);
+        int respuesta = JOptionPane.showOptionDialog(null, questions[num], "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Verdadero", "Falso"}, "Verdadero");
+        if (respuesta == answers[num]) {
+            int option = JOptionPane.showOptionDialog(null, "¿Que decea hacer?", "Opciones", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Quitar trampa", "Comodin"}, "Quitar trampa");
+            if (option == 0) {
+                while (true) {
+                    String f = JOptionPane.showInputDialog("Digite la fila donde se encuentra la trampa");
+                    String c = JOptionPane.showInputDialog("Digite la columna donde se encuentra la trampa");
+                    if (matriz[Integer.parseInt(f)][Integer.parseInt(c)].equals("#")) {
+                        matriz[Integer.parseInt(f)][Integer.parseInt(c)] = " ";
+                        break;
+                    }
+                }
+            } else {
+                for (int i = 0; i < row; i++) {
+                    for (int j = 0; j < column; j++) {
+                        if ("©".equals(matriz[i][j])) {
+                            matriz[i][j] = " ";
+                        }
+                    }
+                }
+                Comodin v = new Comodin();
+                v.setVisible(true);
+            }
+            for (int i = 0; i < row; i++) {
+                OUTER:
+                for (int j = 0; j < column; j++) {
+                    if ("X".equals(matriz[i][j])) {
+                        if (null != matriz[i][j - 1]) {
+                            switch (matriz[i][j - 1]) {
+                                case "#":
+                                    JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
+                                    Laberinto ven = new Laberinto();
+                                    ven.setVisible(true);
+                                    dispose();
+                                    break OUTER;
+                                case " ":
+                                    matriz[i][j] = " ";
+                                    matriz[i][j - 1] = "X";
+                                    for (int x = 0; x < row; x++) {
+                                        for (int y = 0; y < column; y++) {
+                                            mat += matriz[x][y];
+                                        }
+                                        mat += "\n";
                                     }
-                                    mat+="\n";
-                                }
-                                txtLaberinto.setText(mat);
-                                break OUTER;
-                            case "©":
-                                matriz[i][j]=" ";
-                                matriz[i][j-1]="X";
-                                for (int x = 0; x < row; x++) {
-                                    for (int y = 0; y < column; y++) {
-                                        mat+=matriz[x][y];
+                                    txtLaberinto.setText(mat);
+                                    break OUTER;
+                                case "©":
+                                    matriz[i][j] = " ";
+                                    matriz[i][j - 1] = "X";
+                                    for (int x = 0; x < row; x++) {
+                                        for (int y = 0; y < column; y++) {
+                                            mat += matriz[x][y];
+                                        }
+                                        mat += "\n";
                                     }
-                                    mat+="\n";
-                                }
-                                txtLaberinto.setText(mat);
-                                i=row;
-                                JOptionPane.showMessageDialog(null, "Comodin encontrado");
-                                Comodin v = new Comodin();
-                                v.setVisible(true);
-                                break;
-                            case "֍":
-                                JOptionPane.showMessageDialog(null, "Juego Completado");
-                                break;
-                            default:
-                                break;
+                                    txtLaberinto.setText(mat);
+                                    i = row;
+                                    JOptionPane.showMessageDialog(null, "Comodin encontrado");
+                                    Comodin v = new Comodin();
+                                    v.setVisible(true);
+                                    break;
+                                case "֍":
+                                    JOptionPane.showMessageDialog(null, "Juego Completado");
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Respuesta Incorrecta, se ha generado una nueva trampa");
+            while (true) {
+                int f = rand.nextInt(row);
+                int c = rand.nextInt(column);
+                if (matriz[f][c].equals(" ")) {
+                    matriz[f][c] = "#";
+                    break;
+                }
+            }
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < column; j++) {
+                    mat += matriz[i][j];
+                }
+                mat += "\n";
+            }
+            txtLaberinto.setText(mat);
         }
-    }//GEN-LAST:event_btnAActionPerformed
+    }//GEN-LAST:event_btnIzquierdaActionPerformed
 
-    private void btnW1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnW1ActionPerformed
-        for (int i = 0; i < row; i++) {
-            mat = "";
-            OUTER:
-            for (int j = 0; j < column; j++) {
-                if ("X".equals(matriz[i][j])) {
-                    if (null != matriz[i-1][j]) {
-                        switch (matriz[i-1][j]) {
-                            case "#":
-                                JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
-                                Laberinto ven = new Laberinto();
-                                ven.setVisible(true);
-                                dispose();
-                                break OUTER;
-                            case " ":
-                                matriz[i][j] = " ";
-                                matriz[i-1][j] = "X";
-                                for (int x = 0; x < row; x++) {
-                                    for (int y = 0; y < column; y++) {
-                                        mat+=matriz[x][y];
+    private void btnArribaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArribaActionPerformed
+        mat = "";
+        int num = rand.nextInt(3);
+        int respuesta = JOptionPane.showOptionDialog(null, questions[num], "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Verdadero", "Falso"}, "Verdadero");
+        if (respuesta == answers[num]) {
+            int option = JOptionPane.showOptionDialog(null, "¿Que decea hacer?", "Opciones", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Quitar trampa", "Comodin"}, "Quitar trampa");
+            if (option == 0) {
+                while (true) {
+                    String f = JOptionPane.showInputDialog("Digite la fila donde se encuentra la trampa");
+                    String c = JOptionPane.showInputDialog("Digite la columna donde se encuentra la trampa");
+                    if (matriz[Integer.parseInt(f)][Integer.parseInt(c)].equals("#")) {
+                        matriz[Integer.parseInt(f)][Integer.parseInt(c)] = " ";
+                        break;
+                    }
+                }
+            } else {
+                for (int i = 0; i < row; i++) {
+                    for (int j = 0; j < column; j++) {
+                        if ("©".equals(matriz[i][j])) {
+                            matriz[i][j] = " ";
+                        }
+                    }
+                }
+                Comodin v = new Comodin();
+                v.setVisible(true);
+            }
+            for (int i = 0; i < row; i++) {
+                OUTER:
+                for (int j = 0; j < column; j++) {
+                    if ("X".equals(matriz[i][j])) {
+                        if (null != matriz[i - 1][j]) {
+                            switch (matriz[i - 1][j]) {
+                                case "#":
+                                    JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
+                                    Laberinto ven = new Laberinto();
+                                    ven.setVisible(true);
+                                    dispose();
+                                    break OUTER;
+                                case " ":
+                                    matriz[i][j] = " ";
+                                    matriz[i - 1][j] = "X";
+                                    for (int x = 0; x < row; x++) {
+                                        for (int y = 0; y < column; y++) {
+                                            mat += matriz[x][y];
+                                        }
+                                        mat += "\n";
                                     }
-                                    mat+="\n";
-                                }
-                                txtLaberinto.setText(mat);
-                                break OUTER;
-                            case "©":
-                                matriz[i][j]=" ";
-                                matriz[i-1][j]="X";
-                                for (int x = 0; x < row; x++) {
-                                    for (int y = 0; y < column; y++) {
-                                        mat+=matriz[x][y];
+                                    txtLaberinto.setText(mat);
+                                    break OUTER;
+                                case "©":
+                                    matriz[i][j] = " ";
+                                    matriz[i - 1][j] = "X";
+                                    for (int x = 0; x < row; x++) {
+                                        for (int y = 0; y < column; y++) {
+                                            mat += matriz[x][y];
+                                        }
+                                        mat += "\n";
                                     }
-                                    mat+="\n";
-                                }
-                                txtLaberinto.setText(mat);
-                                i=row;
-                                JOptionPane.showMessageDialog(null, "Comodin encontrado");
-                                Comodin v = new Comodin();
-                                v.setVisible(true);
-                                break;
-                            case "֍":
-                                JOptionPane.showMessageDialog(null, "Juego Completado");
-                                break;
-                            default:
-                                break;
+                                    txtLaberinto.setText(mat);
+                                    i = row;
+                                    JOptionPane.showMessageDialog(null, "Comodin encontrado");
+                                    Comodin v = new Comodin();
+                                    v.setVisible(true);
+                                    break;
+                                case "֍":
+                                    JOptionPane.showMessageDialog(null, "Juego Completado");
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Respuesta Incorrecta, se ha generado una nueva trampa");
+            while (true) {
+                int f = rand.nextInt(row);
+                int c = rand.nextInt(column);
+                if (matriz[f][c].equals(" ")) {
+                    matriz[f][c] = "#";
+                    break;
+                }
+            }
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < column; j++) {
+                    mat += matriz[i][j];
+                }
+                mat += "\n";
+            }
+            txtLaberinto.setText(mat);
         }
-    }//GEN-LAST:event_btnW1ActionPerformed
+    }//GEN-LAST:event_btnArribaActionPerformed
 
-    private void btnWActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWActionPerformed
-        for (int i = 0; i < row; i++) {
-            mat = "";
-            OUTER:
-            for (int j = 0; j < column; j++) {
-                if ("X".equals(matriz[i][j])) {
-                    if (null != matriz[i+1][j]) {
-                        switch (matriz[i+1][j]) {
-                            case "#":
-                                JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
-                                Laberinto ven = new Laberinto();
-                                ven.setVisible(true);
-                                dispose();
-                                break OUTER;
-                            case " ":
-                                matriz[i][j] = " ";
-                                matriz[i+1][j] = "X";
-                                for (int x = 0; x < row; x++) {
-                                    for (int y = 0; y < column; y++) {
-                                        mat+=matriz[x][y];
+    private void btnAbajoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbajoActionPerformed
+        mat = "";
+        int num = rand.nextInt(3);
+        int respuesta = JOptionPane.showOptionDialog(null, questions[num], "Pregunta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Verdadero", "Falso"}, "Verdadero");
+        if (respuesta == answers[num]) {
+            int option = JOptionPane.showOptionDialog(null, "¿Que decea hacer?", "Opciones", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Quitar trampa", "Comodin"}, "Quitar trampa");
+            if (option == 0) {
+                while (true) {
+                    String f = JOptionPane.showInputDialog("Digite la fila donde se encuentra la trampa");
+                    String c = JOptionPane.showInputDialog("Digite la columna donde se encuentra la trampa");
+                    if (matriz[Integer.parseInt(f)][Integer.parseInt(c)].equals("#")) {
+                        matriz[Integer.parseInt(f)][Integer.parseInt(c)] = " ";
+                        break;
+                    }
+                }
+            } else {
+                for (int i = 0; i < row; i++) {
+                    for (int j = 0; j < column; j++) {
+                        if ("©".equals(matriz[i][j])) {
+                            matriz[i][j] = " ";
+                        }
+                    }
+                }
+                Comodin v = new Comodin();
+                v.setVisible(true);
+            }
+            for (int i = 0; i < row; i++) {
+                OUTER:
+                for (int j = 0; j < column; j++) {
+                    if ("X".equals(matriz[i][j])) {
+                        if (null != matriz[i + 1][j]) {
+                            switch (matriz[i + 1][j]) {
+                                case "#":
+                                    JOptionPane.showMessageDialog(null, "Game Over, no puede tocar ninguna trampa");
+                                    Laberinto ven = new Laberinto();
+                                    ven.setVisible(true);
+                                    dispose();
+                                    break OUTER;
+                                case " ":
+                                    matriz[i][j] = " ";
+                                    matriz[i + 1][j] = "X";
+                                    for (int x = 0; x < row; x++) {
+                                        for (int y = 0; y < column; y++) {
+                                            mat += matriz[x][y];
+                                        }
+                                        mat += "\n";
                                     }
-                                    mat+="\n";
-                                }
-                                txtLaberinto.setText(mat);
-                                i=row;
-                                break OUTER;
-                            case "©":
-                                matriz[i][j]=" ";
-                                matriz[i+1][j]="X";
-                                for (int x = 0; x < row; x++) {
-                                    for (int y = 0; y < column; y++) {
-                                        mat+=matriz[x][y];
+                                    txtLaberinto.setText(mat);
+                                    i = row;
+                                    break OUTER;
+                                case "©":
+                                    matriz[i][j] = " ";
+                                    matriz[i + 1][j] = "X";
+                                    for (int x = 0; x < row; x++) {
+                                        for (int y = 0; y < column; y++) {
+                                            mat += matriz[x][y];
+                                        }
+                                        mat += "\n";
                                     }
-                                    mat+="\n";
-                                }
-                                txtLaberinto.setText(mat);
-                                i=row;
-                                JOptionPane.showMessageDialog(null, "Comodin encontrado");
-                                Comodin v = new Comodin();
-                                v.setVisible(true);
-                                break;
-                            case "֍":
-                                JOptionPane.showMessageDialog(null, "Juego Completado");
-                                Laberinto vent = new Laberinto();
-                                vent.setVisible(true);
-                                dispose();
-                                break;
-                            default:
-                                break;
+                                    txtLaberinto.setText(mat);
+                                    i = row;
+                                    JOptionPane.showMessageDialog(null, "Comodin encontrado");
+                                    Comodin v = new Comodin();
+                                    v.setVisible(true);
+                                    break;
+                                case "֍":
+                                    JOptionPane.showMessageDialog(null, "Juego Completado");
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Respuesta Incorrecta, se ha generado una nueva trampa");
+            while (true) {
+                int f = rand.nextInt(row);
+                int c = rand.nextInt(column);
+                if (matriz[f][c].equals(" ")) {
+                    matriz[f][c] = "#";
+                    break;
+                }
+            }
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < column; j++) {
+                    mat += matriz[i][j];
+                }
+                mat += "\n";
+            }
+            txtLaberinto.setText(mat);
         }
-    }//GEN-LAST:event_btnWActionPerformed
+    }//GEN-LAST:event_btnAbajoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         Menu ven = new Menu();
@@ -424,15 +584,11 @@ public class Laberinto extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Laberinto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Laberinto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Laberinto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Laberinto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -445,13 +601,13 @@ public class Laberinto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnA;
-    private javax.swing.JButton btnD;
+    private javax.swing.JButton btnAbajo;
+    private javax.swing.JButton btnArriba;
+    private javax.swing.JButton btnDerecha;
     private javax.swing.JButton btnIniciar;
+    private javax.swing.JButton btnIzquierda;
     private javax.swing.JButton btnLaberinto;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnW;
-    private javax.swing.JButton btnW1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

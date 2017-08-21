@@ -24,8 +24,8 @@ public class Comodin extends javax.swing.JFrame implements Runnable {
     int rand3 = rand.nextInt(9-1)+1;
     Thread h1;
     String activado = "si";
-    
     int i = 60;
+    
     public Comodin() {
         initComponents();
         h1 = new Thread(this);
@@ -133,8 +133,10 @@ public class Comodin extends javax.swing.JFrame implements Runnable {
     private void btnAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirActionPerformed
         if(rand1==(int) sprNum1.getValue() && rand2==(int) sprNum2.getValue() && rand3==(int) sprNum3.getValue()){
             JOptionPane.showMessageDialog(null, "Logrado, Juego terminado");
-            h1.suspend();
+            h1.suspend(); 
             dispose();
+            Laberinto ven = new Laberinto();
+            ven.setVisible(true);
         }
     }//GEN-LAST:event_btnAbrirActionPerformed
 
@@ -183,4 +185,5 @@ public class Comodin extends javax.swing.JFrame implements Runnable {
     private javax.swing.JSpinner sprNum3;
     private javax.swing.JTextField txtTime;
     // End of variables declaration//GEN-END:variables
+
 }
