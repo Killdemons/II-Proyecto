@@ -17,8 +17,27 @@ public class Laberinto extends javax.swing.JFrame {
     int column = 10, row = 7, puntos = 0;
     String matriz[][] = new String[row][column];
     String mat = "";
-    String[] questions = {"Contento", "Triste", "Melancolico"};
-    int[] answers = {0, 1, 1};
+    String[] questions = {"¿Es el mouse un dispositivo de salida?", "¿Una impresora con escáner es considerada solamente entrada?", 
+                          "¿Estaba el teclado integrado a las primeras computadoras personales?", "¿La computadora ENIAC salió al mercado hace 71 años?",
+                          "Está correcta la siguiente estructura de programación: \n" +
+                            "int cont=0;\n" +
+                            "While ( cont>0){\n" +
+                            "cont +=1;\n" +
+                            "System.out.println('hola mundo');\n" +
+                            "}",
+                          "La única manera de crear una interfaz gráfica en Java es común Jframe . Es la oración pasada verdadera o falsa",
+                          "El nombre del profesor es Alejandro Álvarez Quezada La oración pasada es verdadera o falsa",
+                          "La herramienta de programación Eclipse utiliza Java. La oración pasada es verdadera o falsa",
+                          "La primera computadora personal era del tamaño de una habitación. La oracion pasada es verdadera o falsa ",
+                          "Es Microsoft Word utilizado en el mundo de la ofimática. La oracion pasada es verdadera o falsa ",
+                          "Es Magali Hamilton una de las pioneras de la programación que llegó el Apolo 11 a la luna",
+                          "Las RAM DDR5 son las mas nuevas en el mercado. La oracion pasada es verdadera o falsa ",
+                          "Las tarjetas  de Red siempre son componentes integrados en una PC. La oracion pasada es verdadera o falsa ",
+                          "java fue introducido en el mercado en 1991. La oracion pasada es verdadera o falsa ",
+                          "El Teclado de ofocina conasta de 105  teclas. La oracion pasada es verdadera o falsa "
+    
+    };
+    int[] answers = {0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0};
     Random rand = new Random();
 
     public Laberinto() {
