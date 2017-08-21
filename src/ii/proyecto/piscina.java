@@ -13,10 +13,18 @@ import javax.swing.JOptionPane;
  */
 public class piscina extends javax.swing.JFrame {
 
+    int contJuegos=1;
+    int cont1 = 0;
+    int cont2 = 0;
+    int cont3 = 0;
+    int cont4 = 0;
+    int cont5 = 0;
     public piscina() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        btnInicio.setEnabled(true);
+        btnrepetir.setEnabled(false);
     }
 
     /**
@@ -132,20 +140,13 @@ public class piscina extends javax.swing.JFrame {
         btnInicio.setEnabled(false);
         btnrepetir.setEnabled(true);
         int ALTO = 504;
-        int contJuegos=0;
-        int cont1 = 0;
-        int cont2 = 0;
-        int cont3 = 0;
-        int cont4 = 0;
-        int cont5 = 0;
-        System.out.println("****************PARTIDA"+contJuegos+++"***********************");
+        txtArea.append("***********PARTIDA "+contJuegos+"**********\n");
         comienzo_hilos nadador1_hilos = new comienzo_hilos(5, ALTO, lblnada1, txtArea);
         comienzo_hilos2 nadador2_hilos = new comienzo_hilos2(37, ALTO, lblnada2, txtArea);
         comienzo_hilos3 nadador3_hilos = new comienzo_hilos3(69, ALTO, lblnada3, txtArea);
         comienzo_hilos4 nadador4_hilos = new comienzo_hilos4(101, ALTO, lblnada4, txtArea);
         comienzo_hilos5 nadador5_hilos = new comienzo_hilos5(133, ALTO, lblnada5, txtArea);
-        int jug1, jug2, jug3, jug4, jug5, opcion ;
-        
+        contJuegos++;
 //***********************************************************************************************************************************
 //                                                      PLAYERS
         if (player1CHK.isSelected()){
@@ -164,10 +165,29 @@ public class piscina extends javax.swing.JFrame {
             nadador5_hilos.start();
         }
         
-        
-       if (comienzo_hilos.T1>(comienzo_hilos2.T2 || comienzo_hilos3.T3 || comienzo_hilos4.T4 || comienzo_hilos5.T5  )){
+       if (comienzo_hilos.T1>(comienzo_hilos2.T2 & comienzo_hilos3.T3 & comienzo_hilos4.T4 & comienzo_hilos5.T5  )){
             cont1++;
        }
+       else if (comienzo_hilos2.T2>(comienzo_hilos.T1 & comienzo_hilos3.T3 & comienzo_hilos4.T4 & comienzo_hilos5.T5  )){
+            cont2++;
+       }
+       else if (comienzo_hilos3.T3>(comienzo_hilos2.T2 & comienzo_hilos.T1 & comienzo_hilos4.T4 & comienzo_hilos5.T5  )){
+            cont3++;
+       }
+       else if (comienzo_hilos4.T4>(comienzo_hilos2.T2 & comienzo_hilos3.T3 & comienzo_hilos.T1 & comienzo_hilos5.T5  )){
+            cont4++;
+       }
+       else if (comienzo_hilos5.T5>(comienzo_hilos2.T2 & comienzo_hilos3.T3 & comienzo_hilos4.T4 & comienzo_hilos.T1  )){
+            cont5++;
+       }
+       txtpPorcentaje.append("                         MVP"
+                           + "\nPlayer1: "+cont1
+                           + "\nPlayer2: "+cont2
+                           + "\nPlayer3: "+cont3
+                           + "\nPlayer4: "+cont4
+                           + "\nPlayer5: "+cont5);
+
+                             
     }//GEN-LAST:event_btnInicioActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
@@ -179,6 +199,7 @@ public class piscina extends javax.swing.JFrame {
     private void btnrepetirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnrepetirActionPerformed
         btnInicio.setEnabled(true);
         btnrepetir.setEnabled(false);
+        txtpPorcentaje.setText("");
         
         
         

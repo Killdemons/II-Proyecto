@@ -32,6 +32,6 @@ public class comienzo_hilos3 extends Thread {
         }
         int fin = (int) new GregorianCalendar().getTimeInMillis();
         T3= fin - inicio;
-        txtArea.append("Player 2: "+T3+" ms\n");
+        txtArea.append("Player 3: "+T3+" ms\n");
     }
 }
