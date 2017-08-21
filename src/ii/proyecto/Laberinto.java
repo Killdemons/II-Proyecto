@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class Laberinto extends javax.swing.JFrame {
 
-    int column = 10, row = 7;
+    int column = 10, row = 7, puntos = 0;
     String matriz[][] = new String[row][column];
     String mat = "";
     String[] questions = {"Contento", "Triste", "Melancolico"};
@@ -48,6 +48,8 @@ public class Laberinto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,13 +120,19 @@ public class Laberinto extends javax.swing.JFrame {
         getContentPane().add(btnIzquierda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
 
         jLabel2.setText("X = Jugador");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jLabel3.setText("֍ = Meta");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         jLabel4.setText("© = Comodin");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jLabel1.setText("Puntaje");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, -1, -1));
+
+        jLabel5.setText("0");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -211,6 +219,8 @@ public class Laberinto extends javax.swing.JFrame {
                 Comodin v = new Comodin();
                 v.setVisible(true);
             }
+            puntos++;
+            jLabel5.setText(""+puntos);
             for (int i = 0; i < row; i++) {
                 OUTER:
                 for (int j = 0; j < column; j++) {
@@ -276,6 +286,8 @@ public class Laberinto extends javax.swing.JFrame {
                 mat += "\n";
             }
             txtLaberinto.setText(mat);
+            puntos--;
+            jLabel5.setText(""+puntos);
         }
     }//GEN-LAST:event_btnDerechaActionPerformed
 
@@ -305,6 +317,8 @@ public class Laberinto extends javax.swing.JFrame {
                 Comodin v = new Comodin();
                 v.setVisible(true);
             }
+            puntos++;
+            jLabel5.setText(""+puntos);
             for (int i = 0; i < row; i++) {
                 OUTER:
                 for (int j = 0; j < column; j++) {
@@ -370,6 +384,8 @@ public class Laberinto extends javax.swing.JFrame {
                 mat += "\n";
             }
             txtLaberinto.setText(mat);
+            puntos--;
+            jLabel5.setText(""+puntos);
         }
     }//GEN-LAST:event_btnIzquierdaActionPerformed
 
@@ -399,6 +415,8 @@ public class Laberinto extends javax.swing.JFrame {
                 Comodin v = new Comodin();
                 v.setVisible(true);
             }
+            puntos++;
+            jLabel5.setText(""+puntos);
             for (int i = 0; i < row; i++) {
                 OUTER:
                 for (int j = 0; j < column; j++) {
@@ -464,6 +482,8 @@ public class Laberinto extends javax.swing.JFrame {
                 mat += "\n";
             }
             txtLaberinto.setText(mat);
+            puntos--;
+            jLabel5.setText(""+puntos);
         }
     }//GEN-LAST:event_btnArribaActionPerformed
 
@@ -493,6 +513,8 @@ public class Laberinto extends javax.swing.JFrame {
                 Comodin v = new Comodin();
                 v.setVisible(true);
             }
+            puntos++;
+            jLabel5.setText(""+puntos);
             for (int i = 0; i < row; i++) {
                 OUTER:
                 for (int j = 0; j < column; j++) {
@@ -559,7 +581,8 @@ public class Laberinto extends javax.swing.JFrame {
                 mat += "\n";
             }
             txtLaberinto.setText(mat);
-        }
+            puntos--;
+            jLabel5.setText(""+puntos);        }
     }//GEN-LAST:event_btnAbajoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -608,9 +631,11 @@ public class Laberinto extends javax.swing.JFrame {
     private javax.swing.JButton btnIzquierda;
     private javax.swing.JButton btnLaberinto;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtLaberinto;
     // End of variables declaration//GEN-END:variables
