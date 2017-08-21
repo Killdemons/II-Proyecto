@@ -157,6 +157,7 @@ public class Laberinto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        btnIniciar.setEnabled(false);
         mat = "";
         if (" ".equals(matriz[1][1])) {
             matriz[1][1] = "X";
